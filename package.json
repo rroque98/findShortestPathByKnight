@@ -1,0 +1,22 @@
+{
+  "name": "findshortestpathbyknight",
+  "version": "1.0.0",
+  "description": "Finds the shortest path between two positions on a chess board with a knight",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rroque98/findShortestPathByKnight.git"
+  },
+  "author": "Ricardo Roque",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rroque98/findShortestPathByKnight/issues"
+  },
+  "homepage": "https://github.com/rroque98/findShortestPathByKnight#readme",
+  "devDependencies": {
+    "mocha": "^6.1.4"
+  }
+}

@@ -1,10 +1,10 @@
-var { findShortestPathByKnight } = require("./index.js");
+var {
+  findShortestPathByKnight,
+  convertToIndexTuple,
+  convertToAlgChessNotation,
+  isMoveValid
+} = require("./index.js");
 var assert = require("assert");
-
-// actual = findShortestPathByKnight("B7", "B7");
-// expected = [];
-// console.log(actual.length === 0);
-// console.log(JSON.stringify(actual) === JSON.stringify(expected));
 
 describe("function findShortestPathByKnight(start, finish)", function() {
   describe("should find shortest path to neighboring position", function() {
@@ -45,5 +45,42 @@ describe("function findShortestPathByKnight(start, finish)", function() {
     it("should return an empty array", function() {
       assert.deepEqual(actual, expected);
     });
+  });
+});
+
+describe("function convertToIndexTuple(chessNotation)", function() {
+  let actual = convertToIndexTuple("B6");
+  let expected = [1, 2];
+  it("should return a tuple with the correct chess board coordinates", function() {
+    assert.deepEqual(actual, expected);
+  });
+});
+
+describe("function convertToAlgChessNotation(position)", function() {
+  let actual = convertToAlgChessNotation([1, 2]);
+  let expected = "B6";
+  it("should return an output with a type of string", function() {
+    assert.equal(typeof actual, "string");
+  });
+  it("should return the correct algebraic chess", function() {
+    assert.equal(actual, expected);
+  });
+});
+
+describe("function isMoveValid(endPos)", function() {
+  it("should return false if the row is invalid", function() {
+    let actual = isMoveValid([-1, 2]);
+    let expected = false;
+    assert.equal(actual, expected);
+  });
+  it("should return false if the col is invalid", function() {
+    let actual = isMoveValid([1, 8]);
+    let expected = false;
+    assert.equal(actual, expected);
+  });
+  it("should return true if the row and col are valid", function() {
+    let actual = isMoveValid([1, 2]);
+    let expected = true;
+    assert.equal(actual, expected);
   });
 });

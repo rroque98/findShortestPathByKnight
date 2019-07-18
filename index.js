@@ -1,7 +1,46 @@
+class Node {
+  constructor(val) {
+    this.val = val;
+    this.next = null;
+  }
+}
+
+class Queue {
+  constructor() {
+    this.first = null;
+    this.last = null;
+    this.size = 0;
+  }
+  enqueue(val) {
+    let node = new Node(val);
+    if (this.size === 0) {
+      this.first = node;
+    } else {
+      this.last.next = node;
+    }
+    this.last = node;
+    return ++this.size;
+  }
+  dequeue() {
+    if (this.size === 0) {
+      return null;
+    }
+    let temp = this.first;
+    if (this.size === 1) {
+      this.first = null;
+      this.last = null;
+    } else {
+      this.first = this.first.next;
+    }
+    this.size--;
+    return temp.val;
+  }
+}
+
 const findShortestPathByKnight = (start, finish) => {
   const visited = {};
-  const queue = [];
-  queue.push(start);
+  const queue = new Queue();
+  queue.enqueue(start);
   const previous = {};
   previous[start] = null;
   const shortestPath = [];
@@ -9,8 +48,8 @@ const findShortestPathByKnight = (start, finish) => {
   const rowIndexes = [-2, -2, -1, 1, 2, 2, 1, -1];
   const colIndexes = [-1, 1, 2, 2, 1, -1, -2, -2];
 
-  while (queue.length) {
-    let algChessNotation = queue.shift();
+  while (queue.size) {
+    let algChessNotation = queue.dequeue();
     if (algChessNotation === finish) {
       shortestPath.push(finish);
       while (previous[algChessNotation]) {
@@ -26,7 +65,7 @@ const findShortestPathByKnight = (start, finish) => {
       if (!visited[currBoardPos] && isMoveValid(currMove)) {
         previous[currBoardPos] = algChessNotation;
         visited[currBoardPos] = true;
-        queue.push(currBoardPos);
+        queue.enqueue(currBoardPos);
       }
     }
   }
